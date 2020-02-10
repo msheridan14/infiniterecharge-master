@@ -48,6 +48,8 @@ public class RobotContainer {
   private final DriveCommand m_driveCommand;
   private final ShiftGearCommand m_gearCommand;
   private final DeliverIntakeCommand m_deliverIntakeCommand;
+  private final ReverseIntakeCommand m_reverseIntakeCommand;
+
   
   public RobotContainer() {
     joystick = new Joystick(0);
@@ -63,14 +65,15 @@ public class RobotContainer {
     m_visionSubsystem = new Vision();
 
 
-    this.m_driveCommand = new DriveCommand(m_driveSubsystem);
-    this.m_gearCommand = new ShiftGearCommand(m_driveSubsystem);
-    this.m_deliverIntakeCommand = new DeliverIntakeCommand(m_intakeSubsystem);
+    m_driveCommand = new DriveCommand(m_driveSubsystem);
+    m_gearCommand = new ShiftGearCommand(m_driveSubsystem);
+    m_deliverIntakeCommand = new DeliverIntakeCommand(m_intakeSubsystem);
+    m_reverseIntakeCommand = new ReverseIntakeCommand(m_intakeSubsystem);
 
     // Configure the button bindings
     configureButtonBindings();
 
-    //m_driveSubsystem.setDefaultCommand(new DriveCommand(m_driveSubsystem));
+    m_driveSubsystem.setDefaultCommand(m_driveCommand);
   }
 
   /**
@@ -84,15 +87,15 @@ public class RobotContainer {
     JoystickButton deliverIntakeButton = new JoystickButton(operatorJoystick, 2);
     JoystickButton reverseIntakeButton = new JoystickButton(operatorJoystick, 3);
 
-    gearShiftButton.toggleWhenPressed(new ShiftGearCommand(m_driveSubsystem));
-    deliverIntakeButton.toggleWhenPressed(new DeliverIntakeCommand(m_intakeSubsystem));
-    reverseIntakeButton.whenPressed(new ReverseIntakeCommand(m_intakeSubsystem));
+    gearShiftButton.toggleWhenPressed(m_gearCommand);
+    deliverIntakeButton.toggleWhenPressed(m_deliverIntakeCommand);
+    reverseIntakeButton.whenPressed(m_reverseIntakeCommand);
 
   }
 
 
-  public Command getTeleopCommand() {
+  /*public Command getTeleopCommand() {
     // An ExampleCommand will run in teleop
-    return m_driveCommand;
-  }
+    return m_driveCommand; 
+  }*/
 }

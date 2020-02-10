@@ -20,7 +20,7 @@ public class Intake extends SubsystemBase {
   WPI_TalonSRX rightIntakeMotor;
 
   private DoubleSolenoid intakeDelivery;
-  private boolean intakeDeliveryState = false;
+  private boolean intakeIsDown = false;
 
   /**
    * Creates a new ExampleSubsystem.
@@ -38,6 +38,8 @@ public class Intake extends SubsystemBase {
     leftIntakeMotor.configFactoryDefault();
     rightIntakeMotor.configFactoryDefault();
 
+    leftIntakeMotor.follow(rightIntakeMotor);
+
   }
 
   @Override
@@ -47,43 +49,46 @@ public class Intake extends SubsystemBase {
   }
 
   public void deliverIntake() {
-    if (intakeDeliveryState) {
-      intakeDelivery.set(DoubleSolenoid.Value.kForward);
-    } else {
-      intakeDelivery.set(DoubleSolenoid.Value.kReverse);
+    if (intakeIsDown) { //if the intake is down
+      intakeDelivery.set(DoubleSolenoid.Value.kForward); //use pneumatics to bring the intake up
+    } else { //if the intake is up
+      intakeDelivery.set(DoubleSolenoid.Value.kReverse); //use pneumatocs to bring the intake down
     }
   }
 
   public void changeMotorState(){
-    if(intakeDeliveryState){
-      rightIntakeMotor.stopMotor();
+    if(intakeIsDown){ //if the intake is down 
+      rightIntakeMotor.stopMotor(); //stop both motors
       leftIntakeMotor.stopMotor();
-    } else{
-      rightIntakeMotor.set(ControlMode.PercentOutput, .1);
-      leftIntakeMotor.set(ControlMode.PercentOutput, .1);
+    } else{ //if the intake is up
+      rightIntakeMotor.set(ControlMode.PercentOutput, IntakeConstants.INTAKE_SPEED_FORWARD); //start both motors going forward
+      //leftIntakeMotor.set(ControlMode.PercentOutput, IntakeConstants.INTAKE_SPEED_FORWARD);
     }
   }
 
-  public boolean getIntakeDeliveryState() {
-    return intakeDeliveryState;
+  public boolean getIntakeIsDown() { 
+    return intakeIsDown;
   }
   
-  public void setIntakeDelivery(boolean state){
-    intakeDeliveryState = state;
+  public void setIntakeIsDown(boolean state){
+    intakeIsDown = state;
   }
 
   public void reverseMotors(){
-    rightIntakeMotor.stopMotor();
-    leftIntakeMotor.stopMotor();
-    Timer.delay(2);
-    rightIntakeMotor.set(ControlMode.PercentOutput, -.1);
-    leftIntakeMotor.set(ControlMode.PercentOutput, -.1);
-    Timer.delay(5);
-    rightIntakeMotor.stopMotor();
-    leftIntakeMotor.stopMotor();
-    Timer.delay(2);
-    rightIntakeMotor.set(ControlMode.PercentOutput, .1);
-    leftIntakeMotor.set(ControlMode.PercentOutput, .1);
+    rightIntakeMotor.stopMotor(); //stop the motors
+    //leftIntakeMotor.stopMotor();
+    Timer.delay(2); // wait two seconds to give motors time to slow down
+
+    rightIntakeMotor.set(ControlMode.PercentOutput, IntakeConstants.INTAKE_SPEED_REVERSE); //put motors in reverse
+    //leftIntakeMotor.set(ControlMode.PercentOutput, IntakeConstants.INTAKE_SPEED_REVERSE);
+    Timer.delay(7); // wait 5 seconds to ensure that the stuck balls are shot out 
+
+    rightIntakeMotor.stopMotor(); // stop the motors
+    //leftIntakeMotor.stopMotor();
+    Timer.delay(2); // wait to seconds again to give motors time to slow down
+
+    rightIntakeMotor.set(ControlMode.PercentOutput, IntakeConstants.INTAKE_SPEED_FORWARD); //set the motors to go forward again
+    //leftIntakeMotor.set(ControlMode.PercentOutput, IntakeConstants.INTAKE_SPEED_FORWARD);
   }
 
 
