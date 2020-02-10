@@ -29,14 +29,14 @@ public class DeliverIntakeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() { 
-    if (m_intake.getIntakeDeliveryState()) {
-      m_intake.changeMotorState();
-      m_intake.deliverIntake();
-      m_intake.setIntakeDelivery(false);
-    } else{
-      m_intake.deliverIntake();
-      m_intake.changeMotorState();
-      m_intake.setIntakeDelivery(true);
+    if (m_intake.getIntakeIsDown()) { //if the intake is down/delivered
+      m_intake.changeMotorState(); //turn the motors off
+      m_intake.deliverIntake(); //bring the intake up
+      m_intake.setIntakeIsDown(false); //set the variable to indicate that the intake is up
+    } else{ // else if the intake is not down/ it is up
+      m_intake.deliverIntake(); // bring the intake down
+      m_intake.changeMotorState(); //turn the motors on 
+      m_intake.setIntakeIsDown(true); // set the variable to indicate that the intake is down/delivered
     } 
   }
 

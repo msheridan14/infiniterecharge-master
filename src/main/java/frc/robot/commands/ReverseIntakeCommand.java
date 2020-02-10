@@ -23,8 +23,11 @@ public class ReverseIntakeCommand extends InstantCommand {
   }
 
   // Called when the command is initially scheduled.
+  
+  /*this command is used to reverse the motors of the intake in case a ball gets stuck. When this button is pressed, 
+  the metheod reverseMotors() is called and then the command immediately ends. */
   @Override
   public void initialize() {
-    m_intake.reverseMotors();
+    m_intake.reverseMotors(); 
   }
 }

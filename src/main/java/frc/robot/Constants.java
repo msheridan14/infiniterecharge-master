@@ -33,6 +33,8 @@ public final class Constants {
 		public static final int INTAKE_SOLENOID_RETRACT = 0;
 		public static final int LEFT_INTAKE_MOTOR = 0;
 		public static final int RIGHT_INTAKE_MOTOR = 0;
+		public static final double INTAKE_SPEED_FORWARD = .1;
+		public static final double INTAKE_SPEED_REVERSE = -.1;
 	}
 
 	public static final class LauncherConstants{

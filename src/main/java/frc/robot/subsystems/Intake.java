@@ -79,7 +79,7 @@ public class Intake extends SubsystemBase {
     //leftIntakeMotor.stopMotor();
     Timer.delay(2); // wait two seconds to give motors time to slow down
 
-    rightIntakeMotor.set(ControlMode.PercentOutput, IntakeConstants.INTAKE_SPEED_REVERSE); //put motors in reverse
+    rightIntakeMotor.set(ControlMode.PercentOutput, IntakeConstants.INTAKE_SPEED_REVERSE); // put motors in reverse
     //leftIntakeMotor.set(ControlMode.PercentOutput, IntakeConstants.INTAKE_SPEED_REVERSE);
     Timer.delay(7); // wait 5 seconds to ensure that the stuck balls are shot out 
 

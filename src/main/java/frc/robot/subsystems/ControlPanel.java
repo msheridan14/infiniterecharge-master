@@ -18,7 +18,7 @@ public class ControlPanel extends SubsystemBase {
    * Creates a new ExampleSubsystem.
    */
    public ControlPanel(){
-     this.controlPanelMotor = new WPI_TalonSRX(ControlPanelConstants.CONTROL_PANEL_MOTOR);
+     controlPanelMotor = new WPI_TalonSRX(ControlPanelConstants.CONTROL_PANEL_MOTOR);
    }
   
   @Override
