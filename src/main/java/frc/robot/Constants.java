@@ -17,29 +17,43 @@ package frc.robot;
  */
 public final class Constants {
 	public static final class ControlPanelConstants{
-		public static final int CONTROL_PANEL_MOTOR = 0;
+		public static final int CONTROL_PANEL_MOTOR = 4;
 	}
 	public static final class DriveConstants{
 		public static final int LEFT_FRONT_MOTOR = 0;
 		public static final int LEFT_BACK_MOTOR = 1;
 		public static final int RIGHT_FRONT_MOTOR = 2;
 		public static final int RIGHT_BACK_MOTOR = 3;
+
 		public static final int GEAR_SHIFT_DEPLOY = 0;
-		public static final int GEAR_SHIFT_RETRACT = 0;
+		public static final int GEAR_SHIFT_RETRACT = 1;
+
+		public static final double TURN_P = 0;
+		public static final double TURN_I = 0;
+		public static final double TURN_D = 0;
+
+		public static final double TURN_RATE_TOLERANCE = 5; // degrees
+		public static final double TURN_TO_TOLERANCE = 10; // degrees per sec
+
+		public static final boolean GYRO_REVERSED = false;
+
+		public static final double MAX_TURN_RATE = 100; //degrees per sec
+		public static final double MAX_TURN_ACCELERATION = 300;//degrees per sec squared
+	
 	}
 	
 	public static final class IntakeConstants{
-		public static final int INTAKE_SOLENOID_DEPLOY = 0;
-		public static final int INTAKE_SOLENOID_RETRACT = 0;
-		public static final int LEFT_INTAKE_MOTOR = 0;
-		public static final int RIGHT_INTAKE_MOTOR = 0;
+		public static final int INTAKE_SOLENOID_DEPLOY = 2;
+		public static final int INTAKE_SOLENOID_RETRACT = 3;
+		public static final int LEFT_INTAKE_MOTOR = 5;
+		public static final int RIGHT_INTAKE_MOTOR = 6;
 		public static final double INTAKE_SPEED_FORWARD = .1;
 		public static final double INTAKE_SPEED_REVERSE = -.1;
 	}
 
 	public static final class LauncherConstants{
-		public static final int LAUNCHER_MOTOR_1 = 0;
-		public static final int LAUNCHER_MOTOR_2 = 0;
+		public static final int LAUNCHER_MOTOR_1 = 7;
+		public static final int LAUNCHER_MOTOR_2 = 8;
 	}
 
 	public static final class LiftConstants{

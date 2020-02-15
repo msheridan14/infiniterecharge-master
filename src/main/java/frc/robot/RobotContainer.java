@@ -10,10 +10,12 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.XboxController.Button;
 import frc.robot.commands.DeliverIntakeCommand;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.ReverseIntakeCommand;
 import frc.robot.commands.ShiftGearCommand;
+import frc.robot.commands.TurnToAngle;
 import frc.robot.subsystems.ControlPanel;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Intake;
@@ -91,6 +93,10 @@ public class RobotContainer {
     deliverIntakeButton.toggleWhenPressed(m_deliverIntakeCommand);
     reverseIntakeButton.whenPressed(m_reverseIntakeCommand);
 
+    new JoystickButton(operatorJoystick, Button.kX.value)
+        .whenPressed(new TurnToAngle(90, m_driveSubsystem).withTimeout(5));
+
+    // Turn to -90 degrees with a profile when the 'A' button is pressed, with a 5 second timeout
   }
 
 
